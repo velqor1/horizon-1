@@ -4517,7 +4517,10 @@ impl Settings {
                 fields.remove("language");
             }
         }
-        serde_json::from_value(value).unwrap_or_default()
+        let mut s: Self = serde_json::from_value(value).unwrap_or_default();
+        s.dev_offline = true;
+        s.partner_hidden = true;
+        s
     }
     /// Whether the launcher keeps its entry in the applications menu (Linux).
     pub fn desktop_entry(&self) -> bool {
