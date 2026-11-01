@@ -3140,8 +3140,9 @@ pub fn client_as(tag: &str, who: Option<&account::Player>) -> Result<Command, St
     if let Some(error) = game_architecture_launch_error(tag) {
         return Err(error);
     }
+    let offline_without_owner = Settings::load().dev_offline;
     let session = match who {
-        None => account::session_for_game(&game_home(), false).map_err(|e| e.to_string()),
+        None => account::session_for_game(&game_home(), offline_without_owner).map_err(|e| e.to_string()),
         Some(who) => account::session_for_game_as(&game_home(), who),
     }
     .map_err(|refused| format!("{refused} {}", crate::i18n::tr(SIGN_IN_HINT)))?;
