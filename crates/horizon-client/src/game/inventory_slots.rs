@@ -224,7 +224,10 @@ impl Game<'_> {
     /// on a hopper or a dispenser on the stock grid (#5141). The rest of those
     /// menus is already the mod's: `draw_native_screen` owns the background and
     /// `screen_height` its height.
-    pub(super) fn stock_machine_slot(stock: Option<(f32, f32)>, mod_screen_shown: bool) -> Option<(f32, f32)> {
+    pub(super) fn stock_machine_slot(
+        stock: Option<(f32, f32)>,
+        mod_screen_shown: bool,
+    ) -> Option<(f32, f32)> {
         if mod_screen_shown { None } else { stock }
     }
 
@@ -264,7 +267,13 @@ impl Game<'_> {
     /// The highlight of the slot under the cursor, for the screens whose
     /// slots all sit in `slot_at`'s grid. `Slot.isHighlightable` is false
     /// for the crafter's result (`NonInteractiveResultSlot`).
-    pub(super) fn draw_hovered_slot_highlight(&self, batch: &mut HudBatch, front: bool, ox: f32, oy: f32) {
+    pub(super) fn draw_hovered_slot_highlight(
+        &self,
+        batch: &mut HudBatch,
+        front: bool,
+        ox: f32,
+        oy: f32,
+    ) {
         let Some(slot) = self.slot_at(batch, self.cursor.0, self.cursor.1) else {
             return;
         };
